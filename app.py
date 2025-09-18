@@ -1,21 +1,26 @@
-import pandas as pd
 import requests
+import pandas as pd
+import numpy as np
 
 def main():
-    # Create a simple DataFrame
-    data = {"Name": ["Alice", "Bob", "Charlie"], "Age": [25, 30, 35]}
-    df = pd.DataFrame(data)
-    print("DataFrame created:")
-    print(df)
+    print("✅ Python Application Running...")
 
-    # Make a simple GET request
+    # Use requests
     response = requests.get("https://httpbin.org/get")
+    print("Response Status:", response.status_code)
+
+    # Use numpy
+    arr = np.array([1, 2, 3, 4, 5])
+    print("Numpy Array Sum:", np.sum(arr))
+
+    # Use pandas
+    df = pd.DataFrame({"Name": ["Alice", "Bob"], "Age": [25, 30]})
+    print("Pandas DataFrame:\n", df)
+
     if response.status_code == 200:
-        print("API call successful:", response.json()["url"])
-        return 0  # success
+        exit(0)   # success → Jenkins interprets as success
     else:
-        print("API call failed with status:", response.status_code)
-        return 1  # failure
+        exit(1)   # failure → Jenkins interprets as failure
 
 if __name__ == "__main__":
-    exit(main())
+    main()
